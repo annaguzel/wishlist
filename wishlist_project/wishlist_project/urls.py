@@ -19,6 +19,7 @@ from wishes import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/',views.signup ,name='signup'),
@@ -30,6 +31,8 @@ urlpatterns = [
     path('list/<int:list_id>/wishes/<int:wish_id>/delete/', views.wish_delete,name='wish-delete'),
     path('list/<int:list_id>/delete/', views.list_delete,name='list-delete'),
     path('list/<int:list_id>/wishes/add',views.wish_create,name='wish-create'),
+    path('list/<int:list_id>/wishes/<int:wish_id>/purchased/',views.wish_purchased,name='wish-purchased'),
+    path('list/<int:list_id>/wishes/<int:wish_id>/unpurchased/',views.wish_unpurchased,name='wish-unpurchased')
 
 
 

@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from .forms import SignupForm, SigninForm, WishForm, ListForm
 from .models import Wish,List
 from django.contrib import messages
+import uuid
 
 def signup(request):
     form = SignupForm()
@@ -110,6 +111,22 @@ def wish_delete(request,list_id,wish_id):
     if request.user == list.creator:
         wish.delete()
     return redirect('wish-list',wish.list.id)
+
+def wish_purchased(request, list_id, wish_id):
+    wish = Wish.objects.get(id=wish_id)
+    wish.is_purchased = True
+    if request.user.is_authenticated:
+        wish.purchased_by = request.user.username
+    else :
+        wish.purchased_by = "Anonymous"
+    wish.save()
+    return redirect('wish-list',wish.list.id)
+
+def wish_unpurchased(request, list_id, wish_id):
+    wish = Wish.objects.get(id=wish_id)
+    wish.is_purchased = False
+    wish.save()
+    return redirect('wish-list', wish.list.id)
 
 
 

@@ -18,9 +18,9 @@ class SigninForm(forms.Form):
 class WishForm(forms.ModelForm):
     class Meta:
         model = Wish
-        exclude = ['list',]
+        exclude = ['list','is_purchased']
 
 class ListForm(forms.ModelForm):
     class Meta:
         model = List
-        exclude = ['creator',]
+        exclude = ['creator','id']

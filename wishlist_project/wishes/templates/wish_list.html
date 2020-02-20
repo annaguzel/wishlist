@@ -10,10 +10,15 @@
     {% if wish.image %}
     <img src="{{wish.image.url}}" class="card-img-top" alt="We are noobs" >
     {% endif %}
-    <p class="card-text" ">Url: {{wish.url}}</p>
+    <a href="{{wish.url}} " target="_blank">Buy This Wish</a>
     {% if request.user == list.creator %}
     <a href="{% url 'wish-delete' wish.list.id wish.id %}" class="btn btn-outline-primary btn-block">Delete</a>
     {% endif %}
+      {% if wish.is_purchased %}
+  <a href="{% url 'wish-unpurchased' wish.list.id wish.id %}"  class="btn btn-success">Not Purchased</a>
+  {% else %}
+  <a href="{% url 'wish-purchased' wish.list.id wish.id %}" class="btn btn-success">Purchased by {%if request.user.is_authenticated %}{{request.user.username}}{% else %}Ananymous{% endif %}</a>
+  {% endif %}
   </div>
 </div>
 
