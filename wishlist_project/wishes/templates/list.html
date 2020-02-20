@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Wishes{% endblock title %}
+
+{% block content %}
+<br>
+{% for list in lists %}
+<div>
+        <div class="card my-card">
+          <div class="card-body">
+            <h5 class="card-title">List Name: {{list.name}}</h5>
+            <a href="{% url 'wish-list' list.id %}" class="btn btn-outline-primary btn-block">View</a>
+            {% if request.user == list.creator %}
+            <a href="{% url 'list-delete' list.id %}" class="btn btn-outline-primary btn-block">Delete</a>
+            {% endif %}
+          </div>
+        </div>
+
+
+    {% endfor %}
+            <a href="{% url 'list-create' %}" class="btn btn-outline-primary btn-block">Start My Wish List</a>
+</div>
+{% endblock content %}
